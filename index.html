@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ejemplo 1</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.min.js"></script>
+
+</head>
+
+
+<div class="container-fluid mt-3" id="app">
+    <input type="text" class="form-control" v-model="criterioDeBusqueda"
+        placeholder="Ingresar un criterio de busqueda...">
+    <br>
+    <div class="card-deck m-0">
+        <div class="row">
+            <div class="col" v-for="persona in personasFiltradas">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{getNombreCompleto(persona)}}</h5>
+                        <p class="card-text">dni {{persona.dni}}</p>
+                        <a href="#" class="card-link">{{persona.correo}}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+</html>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            criterioDeBusqueda: '',
+            //Aquí, en este array es donde tienen que agregar su información
+            personas: [
+                {
+                    nombre: "Daniel",
+                    apellido: "Sánchez",
+                    correo: "danielsanchez68@hotmail.com",
+                    dni: "20442873"
+                },
+                {
+                    nombre: "Federico",
+                    apellido: "Di Muro",
+                    correo: "federicoldimuro@gmail.com",
+                    dni: "37843988"
+                },
+                {
+                    nombre: "Andres",
+                    apellido: "Goossen",
+                    correo: "goossenandres@gmail.com",
+                    dni: "40763987"
+                },
+                {
+                    nombre: "Maria Celeste",
+                    apellido: "Alvarez",
+                    correo: "cel_mary@hotmail.com",
+                    dni: "36874250"
+                },
+                {
+                    nombre: "Augusto",
+                    apellido: "Crivelli",
+                    correo: "augustofedericocrivelli@gmail.com",
+                    dni: "36903846"
+                },
+                {
+                    nombre: "Luca",
+                    apellido: "Czernuszka Schirmer",
+                    correo: "czerluca@gmail.com",
+                    dni: "42723056"
+                },
+                {
+                    nombre: "Alejandro Agustin",
+                    apellido: "Duran",
+                    correo: "alejandro.a.duran@hotmail.com",
+                    dni: "34506896"
+                },
+                {
+                    nombre: "Gonzalo Daniel",
+                    apellido: "Jusid",
+                    correo: "gonzalojusid@gmail.com",
+                    dni: "39388253"
+                },
+                {
+                    nombre: "Nicolas Emanuel",
+                    apellido: "Pacheco",
+                    correo: "nicolas.pacheco.07@hotmail.com",
+                    dni: "36088803"
+                },
+                {
+                    nombre: "Luciana Serena",
+                    apellido: "Acosta Ciancio",
+                    correo: "lula.serena@gmail.com",
+                    dni: "40391132"
+                },
+                {
+                    nombre: "Gonzalo Gabriel",
+                    apellido: "Aquino",
+                    correo: "gga1999@live.com.ar",
+                    dni: "41970515"
+                },
+                {
+                    nombre: "Sasha Nicolas",
+                    apellido: "Berkowsky",
+                    correo: "s.nberkowsky@gmail.com",
+                    dni: "42816270"
+                },
+                {
+                    nombre: "Priscila Elena",
+                    apellido: "Bey",
+                    correo: "pri.bey@gmail.com",
+                    dni: "36785043"
+                },
+                {
+                    nombre: "Tomas Ezequiel",
+                    apellido: "Bou",
+                    correo: "boutomasezequiel@gmail.com",
+                    dni: "41127977"
+                },
+                {
+                    nombre: "Desiree",
+                    apellido: "Cadahia",
+                    correo: "d.cadahia@outlook.com",
+                    dni: "34000909"
+                },
+                {
+                    nombre: "Alex Ian",
+                    apellido: "Costa",
+                    correo: "alexunio@hotmail.com",
+                    dni: "43820248"
+                },
+                {
+                    nombre: "Tamara Vanina",
+                    apellido: "Cristaldo",
+                    correo: "tamaravcristaldo@gmail.com",
+                    dni: "29124875"
+                },
+                {
+                    nombre: "Tomas Alejandro",
+                    apellido: "Fernandez Abrevaya",
+                    correo: "fernandez.abrevaya@gmail.com",
+                    dni: "35324852"
+                },
+                {
+                    nombre: "Ovidio",
+                    apellido: "Saccani",
+                    correo: "osaccani@gmail.com",
+                    dni: "40140084"
+                }
+            ]
+        },
+        computed: {
+            personasFiltradas() {
+                return this.personas.filter((persona) => {
+                    let registroCompleto = `${persona.nombre} ${persona.apellido} ${persona.dni} ${persona.correo}`
+                    return registroCompleto.toLowerCase().includes(this.criterioDeBusqueda.toLowerCase())
+                });
+            }
+        },
+        methods: {
+            getNombreCompleto(persona) {
+                return `${persona.nombre} ${persona.apellido}`
+            }
+        }
+    });
+</script>
