@@ -17,6 +17,17 @@
     <input type="text" class="form-control" v-model="criterioDeBusqueda"
         placeholder="Ingresar un criterio de busqueda...">
     <br>
+
+    <input type="text" class="form-control" v-model="busquedaPorApellido" placeholder="Ingrese el apellido a buscar">
+    <br>
+    
+    <input type="text" class="form-control" v-model="busquedaPorDni" placeholder="Ingrese el DNI a buscar">
+    <br>
+    <!-- <div class="alert alert-warning alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert">&times;</button>
+        <strong>Atención!</strong> Debe ingresar al menos 3 caracteres.
+    </div> -->
+
     <div class="card-deck m-0">
         <div class="row">
             <div class="col" v-for="persona in personasFiltradas">
@@ -40,6 +51,9 @@
         el: '#app',
         data: {
             criterioDeBusqueda: '',
+            busquedaPorDni: '',
+            busquedaPorApellido: '',
+            minLength: 3,
             //Aquí, en este array es donde tienen que agregar su información
             personas: [
                 {
@@ -162,7 +176,9 @@
             personasFiltradas() {
                 return this.personas.filter((persona) => {
                     let registroCompleto = `${persona.nombre} ${persona.apellido} ${persona.dni} ${persona.correo}`
-                    return registroCompleto.toLowerCase().includes(this.criterioDeBusqueda.toLowerCase())
+                    return registroCompleto.toLowerCase().includes(this.criterioDeBusqueda.toLowerCase()) &&
+                           persona.dni.includes(this.busquedaPorDni) &&
+                           persona.apellido.toLowerCase().includes(this.busquedaPorApellido)
                 });
             }
         },
@@ -170,6 +186,7 @@
             getNombreCompleto(persona) {
                 return `${persona.nombre} ${persona.apellido}`
             }
+            
         }
     });
 </script>
